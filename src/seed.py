@@ -1,7 +1,7 @@
 import os 
 import random
 import numpy as np 
-#import torch
+import torch
 
 DEFAULT_RANDOM_SEED = 2021
 
@@ -42,4 +42,4 @@ def seedEverything(seed=42):
         None
     """
     seedBasic(seed)
-    #seedTorch(seed)
+    seedTorch(seed)

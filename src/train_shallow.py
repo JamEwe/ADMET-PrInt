@@ -63,7 +63,7 @@ def train_with_cv_shallow(X, y, model_type, model_seed, data_seed, data_split_se
         model = get_model(model_type, best_params)
         model.fit(train_x, train_y)
         # Save 
-        model_path = 'models_2/{}_{}_{}_{}.pkl'.format(dataset, data_type, model_type,fold_1+1)
+        model_path = 'models/{}_{}_{}_{}.pkl'.format(dataset, data_type, model_type,fold_1+1)
         pickle.dump(model, open(model_path, 'wb'))
         # Eval
         mae_i, mse_i, rmse_i, r2_square_i = evaluate(test_y, model.predict(test_x)) # test

@@ -1,0 +1,11 @@
+preprocess:
+  threshold: 0.01
+hyperparameter_search:
+  seed: 42
+  trials: 10
+train:
+  split: 0.8
+  epochs: 500
+  model_seed: 42
+  data_seed: 42
+evaluate:

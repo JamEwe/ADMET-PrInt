@@ -30,7 +30,7 @@ def get_params(trial, model):
             "max_depth": trial.suggest_int("max_depth", 5, 20),
             "n_estimators": trial.suggest_int("n_estimators", 100, 4000, step=100),
         }
-    elif model_params == "xgboost":
+    elif model == "xgboost":
         return {
             "eta": trial.suggest_float("eta", 0.0, 1.0, step=0.1),
             "lambda": trial.suggest_float("lambda", 0.4, 0.8, step=0.1),
@@ -41,7 +41,7 @@ def get_params(trial, model):
             "colsample_bytree": trial.suggest_float("colsample_bytree", 0.2, 1.0, step=0.05),
             "subsample": trial.suggest_float("subsample", 0.6, 0.9, step=0.1),
         }
-    elif model_params == "lgbm":
+    elif model == "lgbm":
         return {
             "num_leaves": trial.suggest_int("num_leaves", 50, 80, step=10),
             "learning_rate": trial.suggest_float("learning_rate", 1e-5, 1e-1, log=True),
@@ -53,14 +53,14 @@ def get_params(trial, model):
             "colsample_bytree": trial.suggest_float("colsample_bytree", 0.2, 0.6, step=0.05),
             "subsample": trial.suggest_float("subsample", 0.6, 0.9, step=0.1),
         }
-    elif model_params == "hist":
+    elif model == "hist":
         return {
             "learning_rate": trial.suggest_float("learning_rate", 1e-5, 1e-1, log=True),
             "max_depth": trial.suggest_int("max_depth", 5, 20),
             "l2_regularization": trial.suggest_float("l2_regularization", 0.0, 1e-1, step=0.01),
             "min_samples_leaf": trial.suggest_int("min_samples_leaf", 5, 20),
         }
-    elif model_params == "svr":
+    elif model == "svr":
         return {
             "kernel": trial.suggest_categorical("kernel", ['rbf', 'sigmoid']),
             "gamma": trial.suggest_categorical("gamma", ['scale', 'auto']),

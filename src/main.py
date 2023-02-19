@@ -11,8 +11,8 @@ from datetime import datetime
 import argparse
 import preprocess
 from train_shallow import train_with_cv_shallow
+from train_ensemble import train_with_cv_ensemble_avg, train_with_cv_ensemble_meta, train_with_cv_ensemble_meta_kfold
 from eval import mean_value, std_value
-
 
 def main_fc(args, params):
     """Gets arguments and params, trains model and saves logs file
@@ -51,10 +51,15 @@ def main_fc(args, params):
     if args.model in ["ridge","rf","xgboost","lgbm","hist","svr"]:
         mse, mae, rmse, r2, mse_2, mae_2, rmse_2, r2_2 = train_with_cv_shallow(X=X, y=y, model_type=args.model, model_seed=params['train']['model_seed'], data_seed=params['hyperparameter_search']['seed'], data_split_seed=params['train']['data_seed'], n_trials=params['hyperparameter_search']['trials'], dataset=args.dataset, data_type=args.data_type)
     elif args.model in ["avg_ensemble", "meta_model_ensemble", "cv_meta_model_ensemble"]:
+        if args.model=="avg_ensemble":
+            mse, mae, rmse, r2, mse_2, mae_2, rmse_2, r2_2 = train_with_cv_ensemble_avg(X=X, y=y, model_type=args.model, model_seed=params['train']['model_seed'], data_seed=params['hyperparameter_search']['seed'], data_split_seed=params['train']['data_seed'], n_trials=params['hyperparameter_search']['trials'], dataset=args.dataset, data_type=args.data_type)
+        elif args.model=="meta_model_ensemble":
+            mse, mae, rmse, r2, mse_2, mae_2, rmse_2, r2_2 = train_with_cv_ensemble_meta(X=X, y=y, model_type=args.model, model_seed=params['train']['model_seed'], data_seed=params['hyperparameter_search']['seed'], data_split_seed=params['train']['data_seed'], n_trials=params['hyperparameter_search']['trials'], dataset=args.dataset, data_type=args.data_type)
+        elif args.model=="cv_meta_model_ensemble":
+            mse, mae, rmse, r2, mse_2, mae_2, rmse_2, r2_2 = train_with_cv_ensemble_meta_kfold(X=X, y=y, model_type=args.model, model_seed=params['train']['model_seed'], data_seed=params['hyperparameter_search']['seed'], data_split_seed=params['train']['data_seed'], n_trials=params['hyperparameter_search']['trials'], dataset=args.dataset, data_type=args.data_type)    
+    elif args.model=="fully_connected":
         pass
-    elif ags.model=="fully_connected":
-        pass
-    elif ags.model=="graph_conv":
+    elif args.model=="graph_conv":
         pass
     else:
         logger.error("Wrong type of model")

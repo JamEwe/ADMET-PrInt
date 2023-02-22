@@ -80,7 +80,9 @@ def get_model(model_type, params):
     Returns:
         model (Sklearn model): Model object with parameters
     """
-
+    if model_type == "xgboost":
+        params['tree_method']='gpu_hist'
+        params['gpu_id']=0
     models_dict = {
         "ridge": Ridge,
         "rf": RandomForestRegressor,

@@ -120,6 +120,7 @@ def train_with_cv_ensemble_avg(X, y, model_type, model_seed, data_seed, data_spl
         mae_2.append(mae_j)
         rmse_2.append(rmse_j)
         r2_2.append(r2_square_j)
+        del rf, xgboost, lgbm, hist, svr
     return mse, mae, rmse, r2, mse_2, mae_2, rmse_2, r2_2 
 
 def train_with_cv_ensemble_meta(X, y, model_type, model_seed, data_seed, data_split_seed, n_trials, dataset, data_type):
@@ -210,6 +211,7 @@ def train_with_cv_ensemble_meta(X, y, model_type, model_seed, data_seed, data_sp
         mae_2.append(mae_j)
         rmse_2.append(rmse_j)
         r2_2.append(r2_square_j)
+        del rf, xgboost, lgbm, hist, svr
     return mse, mae, rmse, r2, mse_2, mae_2, rmse_2, r2_2 
 
 def train_with_cv_ensemble_meta_kfold(X, y, model_type, model_seed, data_seed, data_split_seed, n_trials, dataset, data_type):

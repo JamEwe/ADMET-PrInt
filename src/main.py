@@ -12,6 +12,7 @@ import argparse
 import preprocess
 from train_shallow import train_with_cv_shallow
 from train_ensemble import train_with_cv_ensemble_avg, train_with_cv_ensemble_meta, train_with_cv_ensemble_meta_kfold
+from train_deep import train_with_cv_fcnn
 from eval import mean_value, std_value
 
 def main_fc(args, params):
@@ -57,9 +58,9 @@ def main_fc(args, params):
             mse, mae, rmse, r2, mse_2, mae_2, rmse_2, r2_2 = train_with_cv_ensemble_meta(X=X, y=y, model_type=args.model, model_seed=params['train']['model_seed'], data_seed=params['hyperparameter_search']['seed'], data_split_seed=params['train']['data_seed'], n_trials=params['hyperparameter_search']['trials'], dataset=args.dataset, data_type=args.data_type)
         elif args.model=="cv_meta_model_ensemble":
             mse, mae, rmse, r2, mse_2, mae_2, rmse_2, r2_2 = train_with_cv_ensemble_meta_kfold(X=X, y=y, model_type=args.model, model_seed=params['train']['model_seed'], data_seed=params['hyperparameter_search']['seed'], data_split_seed=params['train']['data_seed'], n_trials=params['hyperparameter_search']['trials'], dataset=args.dataset, data_type=args.data_type)    
-    elif args.model=="fully_connected":
-        pass
-    elif args.model=="graph_conv":
+    elif args.model=="fcnn":
+        mse, mae, rmse, r2, mse_2, mae_2, rmse_2, r2_2 = train_with_cv_fcnn(X=X, y=y, model_type=args.model, model_seed=params['train']['model_seed'], data_seed=params['hyperparameter_search']['seed'], data_split_seed=params['train']['data_seed'], n_trials=params['hyperparameter_search']['trials'], dataset=args.dataset, data_type=args.data_type, epochs=params['train']['epochs'])
+    elif args.model=="gcnn":
         pass
     else:
         logger.error("Wrong type of model")

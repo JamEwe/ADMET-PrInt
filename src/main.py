@@ -12,7 +12,7 @@ import argparse
 import preprocess
 from train_shallow import train_with_cv_shallow
 from train_ensemble import train_with_cv_ensemble_avg, train_with_cv_ensemble_meta, train_with_cv_ensemble_meta_kfold
-from train_deep import train_with_cv_fcnn
+from train_deep import train_with_cv_fcnn, train_with_cv_gcnn
 from eval import mean_value, std_value
 
 def main_fc(args, params):
@@ -28,7 +28,10 @@ def main_fc(args, params):
 
     # 1. Load data
     logger.info("Load data")
-    data_path = 'data/processed/{}_{}_all.csv'.format(args.dataset, args.data_type)
+    if args.model != 'gcnn':
+        data_path = 'data/processed/{}_{}_all.csv'.format(args.dataset, args.data_type)
+    else: 
+        data_path = 'data/processed/{}_smiles_all.csv'.format(args.dataset)
     df = pd.read_csv(data_path)
     logger.info(df.head())
     logger.info(F'There are {df.shape[0]} records')
@@ -36,8 +39,12 @@ def main_fc(args, params):
 
     # 2. Split data to X and y 
     logger.info("Split data to X and y")
-    X = df.loc[:, df.columns != df.columns[0]]
-    y = df[df.columns[0]]
+    if args.model != 'gcnn':
+        X = df.loc[:, df.columns != df.columns[0]]
+        y = df[df.columns[0]]
+    else:
+        X = df[df.columns[0]]
+        y = df[df.columns[1]]
 
     # 3. Remove low variance features
     if args.data_type == 'klek' or args.data_type == 'pubchem':
@@ -61,7 +68,7 @@ def main_fc(args, params):
     elif args.model=="fcnn":
         mse, mae, rmse, r2, mse_2, mae_2, rmse_2, r2_2 = train_with_cv_fcnn(X=X, y=y, model_type=args.model, model_seed=params['train']['model_seed'], data_seed=params['hyperparameter_search']['seed'], data_split_seed=params['train']['data_seed'], n_trials=params['hyperparameter_search']['trials'], dataset=args.dataset, data_type=args.data_type, epochs=params['train']['epochs'])
     elif args.model=="gcnn":
-        pass
+        mse, mae, rmse, r2, mse_2, mae_2, rmse_2, r2_2 = train_with_cv_gcnn(X=X, y=y, model_type=args.model, model_seed=params['train']['model_seed'], data_seed=params['hyperparameter_search']['seed'], data_split_seed=params['train']['data_seed'], n_trials=params['hyperparameter_search']['trials'], dataset=args.dataset, data_type=args.data_type, epochs=params['train']['epochs'])
     else:
         logger.error("Wrong type of model")
 

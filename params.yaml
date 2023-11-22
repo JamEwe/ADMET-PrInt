@@ -2,10 +2,10 @@ preprocess:
   threshold: 0.01
 hyperparameter_search:
   seed: 42
-  trials: 50 #100
+  trials: 100
 train:
   split: 0.8
   model_seed: 42
   data_seed: 42
-  epochs: 300 #300
+  epochs: 300 
 evaluate:

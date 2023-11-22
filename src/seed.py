@@ -3,8 +3,6 @@ import random
 import numpy as np 
 import torch
 
-DEFAULT_RANDOM_SEED = 2021
-
 def seedBasic(seed=42):
     """Sets seed for basic libraries
 

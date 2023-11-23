@@ -1,7 +1,7 @@
 # Explaining why that molecule
 
 
-Code from: [Exmol](https://github.com/ur-whitelab/exmol) with a few changes. 
+Code from [exmol](https://github.com/ur-whitelab/exmol) with a few changes. 
 
 
 [Gandhi et. al.](https://doi.org/10.26434/chemrxiv-2022-v5p6m-v2)

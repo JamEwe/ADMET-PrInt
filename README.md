@@ -45,6 +45,10 @@ python src/main.py -dataset dataset -data_type data_type -model model
 python src/main.py -dataset cardio -data_type klek -model rf
 ```
 
+Meaning of files:
+- `*_keys.csv`/`*_keys_dict.pickle` - keys meaning for fingerprints
+- `*_idxs.csv` - idxs used for training (for models, with high variance)
+
 ## App
 
 All developed tools can be used via the online platform available at:

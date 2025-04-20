@@ -57,8 +57,18 @@ All developed tools can be used via the online platform available at:
 
 ## Citation
 
+Please cite [Jamrozik et al.](https://pubs.acs.org/doi/10.1021/acs.jcim.3c02038)
+
 ```bibtex
-@Article{
+@article{jamrozik2024admet,
+  title={ADMET-PrInt: Evaluation of ADMET properties: Prediction and interpretation},
+  author={Jamrozik, Ewelina and Smieja, Marek and Podlewska, Sabina},
+  journal={Journal of Chemical Information and Modeling},
+  volume={64},
+  number={5},
+  pages={1425--1432},
+  year={2024},
+  publisher={ACS Publications}
 }
 ```
 

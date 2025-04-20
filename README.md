@@ -53,7 +53,7 @@ Meaning of files:
 
 All developed tools can be used via the online platform available at:
 
-[![app](https://raw.githubusercontent.com/JamEwe/predictADMET/ADMET_prediction_app_screen.png)](https://admet.if-pan.krakow.pl)
+[![app](https://raw.githubusercontent.com/JamEwe/ADMET-PrInt/master/ADMET_prediction_app_screen.png)](https://admet.if-pan.krakow.pl)
 
 ## Citation
 
